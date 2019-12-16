@@ -24,16 +24,13 @@ export default class MainPage {
           <li class="nav-item active">
           </li>
           <li class="nav-item active">
-            <a class="nav-link" data-id="menu-main" href="/">Лента</a>
+            <a class="nav-link" data-id="menu-main" href="/posts">Лента</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" data-id="menu-messages" href="/messages">Сообщения</a>
+            <a class="nav-link" data-id="menu-messages" href="/users">Пользователи</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" data-id="menu-messages" href="/messages">Пользователи</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" data-id="menu-messages" href="/messages">Выйти</a>
+            <a class="nav-link" data-id="menu-messages" href="/logout">Выйти</a>
           </li>
         </ul>
         <form data-id="search-form" class="form-inline my-2 my-lg-0">
@@ -223,8 +220,8 @@ export default class MainPage {
           <div class="card-footer">
             <div class="row">
               <div class="col">
-                <a href="#" data-action="like" class="btn btn-sm btn-info">Like</a>
-                <a href="#" data-action="dislike"class="btn btn-sm btn-danger" hidden="true">Dislike</a>
+                <a href="#" data-action="like" class="btn btn-sm btn-info" >Like</a>
+                <a href="#" data-action="dislike"class="btn btn-sm btn-danger" >Dislike</a>
               </div>
               <div class="col text-right">
                 <a href="#" data-action="edit" class="btn btn-sm btn-info">Edit</a>
@@ -244,8 +241,6 @@ export default class MainPage {
         }, error => {
                 this.showError(error);
             });
-                postEl.querySelector('[data-action=like]').setAttribute("hidden",true);
-                postEl.querySelector('[data-action=dislike]').removeAttribute("hidden");
         });
             postEl.querySelector('[data-action=dislike]').addEventListener('click', evt => {
                 evt.preventDefault();

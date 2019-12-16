@@ -2,9 +2,7 @@ export default class LoginPage {
     constructor(context) {
         this._context = context;
         this._rootEl = context.rootEl();
-        this._firstPostId = 0;
-        this._lastPost = 0;
-        this._postsCount = 3;
+
     }
 
     init() {
@@ -37,9 +35,27 @@ export default class LoginPage {
         </div>
       </div>
     </div>
+    <div class="modal fade" data-id="error-modal" tabindex="-1" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ошибка!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div data-id="error-message" class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
     `;
 
+        this._errorModal = $('[data-id=error-modal]'); // jquery
+        this._errorMessageEl = this._rootEl.querySelector('[data-id=error-message]');
         this._loginFormEl = this._rootEl.querySelector('[data-id=login-form]');
         this._loginInputEl = this._postCreateFormEl.querySelector('[data-id=login-input]');
         this._passwordInputEl = this._postCreateFormEl.querySelector('[data-id=password-input]');

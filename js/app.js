@@ -4,6 +4,7 @@ import Router from './router.js';
 import MainPage from './pages/MainPage.js'
 import MessagesPage from './pages/MessagesPage.js'
 import LoginPage from './pages/LoginPage.js'
+import UserPage from './pages/UserPage.js'
 
 class Context {
     constructor(rootEl, api, router, translator, mediaUrl, websocketUrl) {
@@ -92,6 +93,7 @@ const router = new Router();
 router.register('/', MainPage);
 router.register('/messages', MessagesPage);
 router.register('/login',LoginPage);
+router.register('/users',UserPage);
 const [backendUrl, websocketUrl] = ['localhost', '127.0.0.1'].includes(window.location.hostname) ?
     ['http://localhost:9999', 'ws://localhost:9999/ws'] : ['https://socialnetwork-back.herokuapp.com/', 'wss://socialnetwork-back.herokuapp.com/ws'];
 
