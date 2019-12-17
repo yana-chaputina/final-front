@@ -208,20 +208,19 @@ export default class MainPage {
             }
 
             postEl.innerHTML = `
-
-<div class="card mb-3">
+        <div class="card mb-3">
           <div class="card-body">
             <p class="card-text">${post.content}</p>
             <p class="card-text">${post.authorName}</p>
             <p class="card-text">${post.created}</p>
-            ${postMedia}
             <p class="card-text">Likes: ${post.likes}</p>
+            ${postMedia}
           </div>
           <div class="card-footer">
             <div class="row">
               <div class="col">
                 <a href="#" data-action="like" class="btn btn-sm btn-info" >Like</a>
-                <a href="#" data-action="dislike"class="btn btn-sm btn-danger" >Dislike</a>
+                <a href="#" data-action="dislike" class="btn btn-sm btn-danger">Dislike</a>
               </div>
               <div class="col text-right">
                 <a href="#" data-action="edit" class="btn btn-sm btn-info">Edit</a>
@@ -251,8 +250,6 @@ export default class MainPage {
         }, error => {
                 this.showError(error);
             });
-                postEl.querySelector('[data-action=dislike]').setAttribute("hidden",true);
-                postEl.querySelector('[data-action=like]').removeAttribute("hidden");
         });
             postEl.querySelector('[data-action=edit]').addEventListener('click', evt => {
                 evt.preventDefault();
