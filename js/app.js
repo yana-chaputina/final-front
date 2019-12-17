@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage.js'
 import MessagesPage from './pages/MessagesPage.js'
 import LoginPage from './pages/LoginPage.js'
 import UserPage from './pages/UserPage.js'
+import RegisterPage from './pages/RegisterPage.js'
 
 class Context {
   constructor(rootEl, api, router, translator, mediaUrl, websocketUrl) {
@@ -15,7 +16,6 @@ class Context {
       this.route(path, false);
     });
     this._translator = translator;
-    // see https://developer.mozilla.org/ru/docs/Web/API/Web_Storage_API
     this._auth = localStorage.getItem('auth');
     this._profile = JSON.parse(localStorage.getItem('profile'));
     if (!this._auth) {
@@ -121,6 +121,7 @@ const translator = new Translator();
 const router = new Router();
 
 router.register('/', LoginPage);
+router.register('/register', RegisterPage);
 router.register('/posts', MainPage);
 router.register('/messages', MessagesPage);
 router.register('/users', UserPage);

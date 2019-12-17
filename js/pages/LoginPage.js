@@ -27,7 +27,7 @@ export default class LoginPage {
                       </form>
                     </div>
                     <div class="login-links">
-                      <p class="text-center" >Еще нет аккаунта? <a class="txt-brand" href="/register">
+                      <p class="text-center" >Еще нет аккаунта? <a class="txt-brand" href="/register" data-id="register">
                           <font color="#29aafe">Зарегистрируйтесь</font>
                         </a></p>
                     </div>
@@ -53,6 +53,11 @@ export default class LoginPage {
             </div>
           </div>
     `;
+
+        this._rootEl.querySelector('[data-id=register]').addEventListener('click', evt => {
+            evt.preventDefault();
+            this._context.route(evt.currentTarget.getAttribute('href'));
+        });
 
         this._errorModal = $('[data-id=error-modal]'); // jquery
         this._errorMessageEl = this._rootEl.querySelector('[data-id=error-message]');

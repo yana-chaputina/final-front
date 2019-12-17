@@ -28,9 +28,9 @@ export default class UserPage {
           <li class="nav-item active">
             <a class="nav-link" data-id="menu-messages" href="/users">Пользователи</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" data-id="menu-messages" href="/logout">Выйти</a>
-          </li>
+          <form data-id="logout-form" class="form-inline my-2 my-lg-0">             
+              <button type="submit" class="btn btn-info">Выйти</button>
+            </form>
         </ul>
         <form data-id="search-form" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -70,6 +70,12 @@ export default class UserPage {
         this._rootEl.querySelector('[data-id=menu-messages]').addEventListener('click', evt => {
             evt.preventDefault();
             this._context.route(evt.currentTarget.getAttribute('href'));
+        });
+
+        this._logoutForm = this._rootEl.querySelector('[data-id=logout-form]');
+        this._logoutForm.addEventListener('submit', evt => {
+            evt.preventDefault();
+            this._context.logout();
         });
 
         this._errorModal = $('[data-id=error-modal]'); // jquery

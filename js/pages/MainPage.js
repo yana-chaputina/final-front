@@ -28,17 +28,14 @@ export default class MainPage {
               </li>
               <li class="nav-item active">
                 <a class="nav-link" data-id="menu-messages" href="/users">Пользователи</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" data-id="menu-messages" href="/logout">Выйти</a>
-              </li>
+              </li>              
+              <form data-id="logout-form" class="form-inline my-2 my-lg-0">             
+              <button type="submit" class="btn btn-info">Выйти</button>
+            </form>
             </ul>
             <form data-id="search-form" class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search">
               <button type="submit" class="btn btn-info">Поиск</button>
-            </form>
-            <form data-id="logout-form" class="form-inline my-2 my-lg-0">
-              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
             </form>
           </div>
         </nav>
@@ -249,16 +246,16 @@ export default class MainPage {
             this.showError(error);
           });
       });
-      postEl.querySelector('[data-action=dislike]').addEventListener('click', evt => {
-        evt.preventDefault();
-        this._context.delete(`/posts/${post.id}/likes`, {},
-          () => {
-            this.clean();
-            this.loadMorePosts(0, this._lastPost);
-          }, error => {
-            this.showError(error);
-          });
-      });
+        postEl.querySelector('[data-action=dislike]').addEventListener('click', evt => {
+            evt.preventDefault();
+            this._context.delete(`/posts/${post.id}/likes`, {},
+                () => {
+                    this.clean();
+                    this.loadMorePosts(0, this._lastPost);
+                }, error => {
+                    this.showError(error);
+                });
+        });
       postEl.querySelector('[data-action=edit]').addEventListener('click', evt => {
         evt.preventDefault();
         this._idInputEl.value = post.id;
