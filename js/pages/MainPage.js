@@ -32,7 +32,7 @@ export default class MainPage {
             </form>
             </ul>
             <form data-id="search-form" class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" data-id="search-input">
               <button type="submit" class="btn btn-info">Поиск</button>
             </form>
           </div>
@@ -114,7 +114,23 @@ export default class MainPage {
     this._contentInputEl = this._postCreateFormEl.querySelector('[data-id=content-input]');
     this._mediaNameInputEl = this._postCreateFormEl.querySelector('[data-id=media-name-input]');
     this._mediaInputEl = this._postCreateFormEl.querySelector('[data-id=media-input]');
+    this._searchFormEl = this._rootEl.querySelector('[data-id=search-form]');
+    this._searchInputEl = this._searchFormEl.querySelector('[data-id="search-input"]');
 
+
+    this._searchFormEl.addEventListener('submit', evt => {
+      evt.preventDefault();
+      const str = '?q=' + this._searchInputEl.value;
+      this._context.get('/posts'+str, {},
+          text => {
+            const posts = JSON.parse(text);
+            this.clean();
+            this.loadNewList(posts);
+          },
+          error => {
+            this.showError(error);
+          });
+    });
     this._mediaInputEl.addEventListener('change', evt => {
       // evt.currentTarget -> тот, чей обработчик события сейчас выполняется
       // File -> Blob

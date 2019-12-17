@@ -30,8 +30,8 @@ export default class UserPage {
             </form>
         </ul>
         <form data-id="search-form" class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search">
-          <button type="submit" class="btn btn-info">Поиск</button>
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" data-id="search-input">
+              <button type="submit" class="btn btn-info">Поиск</button>
         </form>
       </div>
     </nav>
@@ -83,8 +83,28 @@ export default class UserPage {
         this._errorModal = $('[data-id=error-modal]'); // jquery
         this._errorMessageEl = this._rootEl.querySelector('[data-id=error-message]');
         this._usersContainerEl = this._rootEl.querySelector('[data-id=users-container]');
+        this._searchFormEl = this._rootEl.querySelector('[data-id=search-form]');
+        this._searchInputEl = this._searchFormEl.querySelector('[data-id="search-input"]');
+
+        this._searchFormEl.addEventListener('submit', evt => {
+            evt.preventDefault();
+            const str = '?q=' + this._searchInputEl.value;
+            this._context.get('/users'+str, {},
+                text => {
+                    const users = JSON.parse(text);
+                    this.clean();
+                    this.loadNewList(users);
+                },
+                error => {
+                    this.showError(error);
+                });
+        });
 
         this.loadUsers();
+    }
+
+    clean() {
+        this._usersContainerEl.innerHTML = ``;
     }
 
     loadUsers() {
@@ -112,6 +132,7 @@ export default class UserPage {
            </div>
            <div class="card-body">
             <p class="card-text">${user.name}</p>
+            <p class="card-text">${user.username}</p>
             <p class="card-text">${user.email}</p>
            </div>
           </div>

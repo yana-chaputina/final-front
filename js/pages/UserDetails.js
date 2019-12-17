@@ -87,6 +87,8 @@ export default class UserDetails {
         this.loadDetails();
     }
 
+
+
     loadDetails() {
         this._context.get("/users/me", {},
             text => {
