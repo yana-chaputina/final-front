@@ -1,4 +1,4 @@
-export default class UserPage {
+export default class UserDetails {
     constructor(context) {
         this._context = context;
         this._rootEl = context.rootEl();
@@ -25,7 +25,7 @@ export default class UserPage {
           <li class="nav-item active">
             <a class="nav-link" data-id="menu-users" href="/users">Пользователи</a>
           </li>
-          <form data-id="logout-form" class="form-inline my-2 my-lg-0">             
+          <form data-id="logout-form" class="form-inline my-2 my-lg-0">
               <button type="submit" class="btn btn-info">Выйти</button>
             </form>
         </ul>
@@ -68,10 +68,10 @@ export default class UserPage {
         });
         this._rootEl.querySelector('[data-id=menu-me]').addEventListener('click', evt => {
             evt.preventDefault();
-            this._context.route(evt.currentTarget.getAttribute('href'));
         });
         this._rootEl.querySelector('[data-id=menu-users]').addEventListener('click', evt => {
             evt.preventDefault();
+            this._context.route(evt.currentTarget.getAttribute('href'));
         });
 
         this._logoutForm = this._rootEl.querySelector('[data-id=logout-form]');
@@ -84,40 +84,35 @@ export default class UserPage {
         this._errorMessageEl = this._rootEl.querySelector('[data-id=error-message]');
         this._usersContainerEl = this._rootEl.querySelector('[data-id=users-container]');
 
-        this.loadUsers();
+        this.loadDetails();
     }
 
-    loadUsers() {
-        this._context.get("/users", {},
+    loadDetails() {
+        this._context.get("/users/me", {},
             text => {
-                const users = JSON.parse(text);
-                this.loadNewList(users);
+                const user = JSON.parse(text);
+                this.loadNewList(user);
             },
             error => {
                 this.showError(error);
             });
     }
 
-    loadNewList(users) {
-        if (!users) {
+    loadNewList(user) {
+        if (!user) {
             return;
         }
-        for (const user of users) {
             const userEl = document.createElement('div');
             userEl.innerHTML = `
-          <div class="card mb-3">
-           <div class="row no-gutters">
-            <div class="col-md-4">
-            <img src="${this._context.mediaUrl()}/${user.photo}" class="card-img">
-           </div>
-           <div class="card-body">
-            <p class="card-text">${user.name}</p>
-            <p class="card-text">${user.email}</p>
-           </div>
+            <div class="card" >
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center;"> ${user.name}</h5>
+              <h6 class="card-title" style="text-align: center;">${user.email}</h6>
+            </div>
+            <img class="card-img-top" src="${this._context.mediaUrl()}/${user.photo}">
           </div>
       `;
             this._usersContainerEl.appendChild(userEl);
-        }
     }
 
 

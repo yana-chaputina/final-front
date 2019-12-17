@@ -2,10 +2,10 @@ import Api from './http.js';
 import Translator from './translator.js';
 import Router from './router.js';
 import MainPage from './pages/MainPage.js'
-import MessagesPage from './pages/MessagesPage.js'
 import LoginPage from './pages/LoginPage.js'
 import UserPage from './pages/UserPage.js'
 import RegisterPage from './pages/RegisterPage.js'
+import UserDetails from './pages/UserDetails.js'
 
 class Context {
   constructor(rootEl, api, router, translator, mediaUrl, websocketUrl) {
@@ -123,8 +123,8 @@ const router = new Router();
 router.register('/', LoginPage);
 router.register('/register', RegisterPage);
 router.register('/posts', MainPage);
-router.register('/messages', MessagesPage);
 router.register('/users', UserPage);
+router.register('/details', UserDetails);
 const [backendUrl, websocketUrl] = ['localhost', '127.0.0.1'].includes(window.location.hostname) ?
   ['http://localhost:9999', 'ws://localhost:9999/ws'] : ['https://socialnetwork-back.herokuapp.com/', 'wss://socialnetwork-back.herokuapp.com/ws'];
 

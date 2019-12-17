@@ -19,15 +19,13 @@ export default class MainPage {
           <div class="collapse navbar-collapse" id="navbar-supported-content">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" data-id="menu-main" href="/">Моя страница</a>
-              </li>
-              <li class="nav-item active">
+                <a class="nav-link" data-id="menu-me" href="/details">Моя страница</a>
               </li>
               <li class="nav-item active">
                 <a class="nav-link" data-id="menu-main" href="/posts">Лента</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" data-id="menu-messages" href="/users">Пользователи</a>
+                <a class="nav-link" data-id="menu-users" href="/users">Пользователи</a>
               </li>              
               <form data-id="logout-form" class="form-inline my-2 my-lg-0">             
               <button type="submit" class="btn btn-info">Выйти</button>
@@ -60,7 +58,9 @@ export default class MainPage {
                 </form>
               </div>
             </div>
-            <div class="row" data-id="new-posts"></div>
+            <div class="row">
+            <div class="col" data-id="new-posts"></div>
+            </div>
             <br/>
             <div class="row">
               <div class="col" data-id="posts-container"></div>
@@ -87,13 +87,17 @@ export default class MainPage {
       </div>
     `;
 
-    this._rootEl.querySelector('[data-id=menu-main]').addEventListener('click', evt => {
-      evt.preventDefault();
-    });
-    this._rootEl.querySelector('[data-id=menu-messages]').addEventListener('click', evt => {
-      evt.preventDefault();
-      this._context.route(evt.currentTarget.getAttribute('href'));
-    });
+      this._rootEl.querySelector('[data-id=menu-main]').addEventListener('click', evt => {
+          evt.preventDefault();
+      });
+      this._rootEl.querySelector('[data-id=menu-me]').addEventListener('click', evt => {
+          evt.preventDefault();
+          this._context.route(evt.currentTarget.getAttribute('href'));
+      });
+      this._rootEl.querySelector('[data-id=menu-users]').addEventListener('click', evt => {
+          evt.preventDefault();
+          this._context.route(evt.currentTarget.getAttribute('href'));
+      });
 
     this._logoutForm = this._rootEl.querySelector('[data-id=logout-form]');
     this._logoutForm.addEventListener('submit', evt => {
@@ -320,14 +324,14 @@ export default class MainPage {
   newPostsAnnotation(count) {
     this._newPostsEl.innerHTML = '';
     const newPostEl = document.createElement('div');
-    newPostEl.innerHTML = `
-    <div class="card">
-      <div class="card-body">
-        <div class="col text-center">
-          <a href="#" data-action="new-posts" class="btn btn-sm btn-info">Upload ${count} new posts</a>
-        </div>
-      </div>
-    </div>`;
+    newPostEl.innerHTML =`
+        <div class="card">
+          <div class="card-body">
+           <div class="col text-center">
+            <a href="#" data-action="new-posts" class="btn btn-sm btn-info">Upload ${count} new posts</a>
+           </div>
+          </div>
+        </div>`;
 
     newPostEl.querySelector('[data-action=new-posts]').addEventListener('click', evt => {
       evt.preventDefault();
