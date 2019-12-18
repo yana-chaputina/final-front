@@ -77,7 +77,7 @@ export default class RegisterPage {
   </div>
     `;
         this._alertEl = $('[data-id="alert"]');
-        this._errorModal = $('[data-id=error-modal]'); // jquery
+        this._errorModal = $('[data-id=error-modal]');
         this._errorMessageEl = this._rootEl.querySelector('[data-id=error-message]');
         this._registerFormEl = this._rootEl.querySelector('[data-id=register-form]');
         this._nameInputEl = this._registerFormEl.querySelector('[data-id=name-input]');
@@ -89,21 +89,19 @@ export default class RegisterPage {
         this._photoInputEl = this._registerFormEl.querySelector('[data-id=photo-input]');
 
         this._photoInputEl.addEventListener('change', evt => {
-             // evt.currentTarget -> тот, чей обработчик события сейчас выполняется
-             // File -> Blob
-             const [file] = Array.from(evt.currentTarget.files);
-            // FormData -> сам выставит нужные заголовки и закодирует тело запроса
+
+            const [file] = Array.from(evt.currentTarget.files);
             const formData = new FormData();
             formData.append('file', file);
             this._context.post('/files/multipart', formData, {},
                 text => {
                     const data = JSON.parse(text);
                     this._photoNameInputEl.value = data.name;
-                    },
-                 error => {
-                     this.showError(error);
+                },
+                error => {
+                    this.showError(error);
                 });
-         });
+        });
 
 
         this._registerFormEl.addEventListener('submit', evt => {
@@ -114,23 +112,23 @@ export default class RegisterPage {
                 email: this._emailInputEl.value,
                 username: this._loginInputEl.value,
                 password: this._passwordInputEl.value,
-                photo: this._photoInputEl.value || null
-             };
+                photo: this._photoNameInputEl.value || null
+            };
             this._context.post('/users', JSON.stringify(data), {'Content-Type': 'application/json'},
-                 text => {
-                      this._idInputEl.value=0;
-                      this._nameInputEl.value='';
-                      this._emailInputEl.value='';
-                      this._loginInputEl.value='';
-                      this._passwordInputEl.value='';
-                      this._photoInputEl.value='';
+                text => {
+                    this._idInputEl.value = 0;
+                    this._nameInputEl.value = '';
+                    this._emailInputEl.value = '';
+                    this._loginInputEl.value = '';
+                    this._passwordInputEl.value = '';
+                    this._photoInputEl.value = '';
 
-                      this._alertEl.show();
-                 },
-                 error => {
+                    this._alertEl.show();
+                },
+                error => {
                     this.showError(error);
-                 });
-         });
+                });
+        });
     }
 
     showError(error) {

@@ -88,7 +88,6 @@ export default class UserDetails {
     }
 
 
-
     loadDetails() {
         this._context.get("/users/me", {},
             text => {
@@ -104,17 +103,17 @@ export default class UserDetails {
         if (!user) {
             return;
         }
-            const userEl = document.createElement('div');
-            userEl.innerHTML = `
-            <div class="card" >
+        const userEl = document.createElement('div');
+        userEl.innerHTML = `
+            <div class="card" >  
             <div class="card-body">
-              <h5 class="card-title" style="text-align: center;"> ${user.name}</h5>
+              <h5 class="card-title" style="text-align: center;">${user.name}</h5>
+              <h6 class="card-title" style="text-align: center;">${user.username}</h6>
               <h6 class="card-title" style="text-align: center;">${user.email}</h6>
             </div>
-            <img class="card-img-top" src="${this._context.mediaUrl()}/${user.photo}">
           </div>
       `;
-            this._usersContainerEl.appendChild(userEl);
+        this._usersContainerEl.appendChild(userEl);
     }
 
 

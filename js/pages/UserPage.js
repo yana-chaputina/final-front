@@ -80,7 +80,7 @@ export default class UserPage {
             this._context.logout();
         });
 
-        this._errorModal = $('[data-id=error-modal]'); // jquery
+        this._errorModal = $('[data-id=error-modal]');
         this._errorMessageEl = this._rootEl.querySelector('[data-id=error-message]');
         this._usersContainerEl = this._rootEl.querySelector('[data-id=users-container]');
         this._searchFormEl = this._rootEl.querySelector('[data-id=search-form]');
@@ -89,7 +89,7 @@ export default class UserPage {
         this._searchFormEl.addEventListener('submit', evt => {
             evt.preventDefault();
             const str = '?q=' + this._searchInputEl.value;
-            this._context.get('/users'+str, {},
+            this._context.get('/users' + str, {},
                 text => {
                     const users = JSON.parse(text);
                     this.clean();
@@ -127,13 +127,10 @@ export default class UserPage {
             userEl.innerHTML = `
           <div class="card mb-3">
            <div class="row no-gutters">
-            <div class="col-md-4">
-            <img src="${this._context.mediaUrl()}/${user.photo}" class="card-img">
-           </div>
            <div class="card-body">
-            <p class="card-text">${user.name}</p>
-            <p class="card-text">${user.username}</p>
-            <p class="card-text">${user.email}</p>
+            <p class="card-text">Имя: ${user.name}</p>
+            <p class="card-text">Логин: ${user.username}</p>
+            <p class="card-text">Email: ${user.email}</p>
            </div>
           </div>
       `;

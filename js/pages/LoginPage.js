@@ -59,7 +59,7 @@ export default class LoginPage {
             this._context.route(evt.currentTarget.getAttribute('href'));
         });
 
-        this._errorModal = $('[data-id=error-modal]'); // jquery
+        this._errorModal = $('[data-id=error-modal]');
         this._errorMessageEl = this._rootEl.querySelector('[data-id=error-message]');
         this._loginFormEl = this._rootEl.querySelector('[data-id=login-form]');
         this._loginInputEl = this._loginFormEl.querySelector('[data-id=login-input]');
@@ -70,8 +70,7 @@ export default class LoginPage {
             const login = this._loginInputEl.value;
             const password = this._passwordInputEl.value;
 
-            // Make request only for verify login and password
-            this._context.get('/users/me',  {'Authorization': `Basic ${btoa(login + ':' + password)}`},
+            this._context.get('/users/me', {'Authorization': `Basic ${btoa(login + ':' + password)}`},
                 text => {
                     this._context.login(login, password, text);
                 },
