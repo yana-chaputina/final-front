@@ -110,6 +110,7 @@ export default class UserDetails {
               <h5 class="card-title" style="text-align: center;">${user.name}</h5>
               <h6 class="card-title" style="text-align: center;">${user.username}</h6>
               <h6 class="card-title" style="text-align: center;">${user.email}</h6>
+              <img src="${this._context.mediaUrl()}/${user.photo}" class="img-responsive mx-auto d-block" style="max-width: 30%;" alt="...">
             </div>
           </div>
       `;

@@ -214,9 +214,9 @@ export default class MainPage {
             const postEl = document.createElement('div');
             let postMedia = '';
             if (post.media !== null) {
-                if (post.media.endsWith('.png') || post.media.endsWith('.jpg')) {
+                if (post.media.endsWith('.png') || post.media.endsWith('.jpg')||post.media.endsWith('.jpeg')) {
                     postMedia += `
-            <img src="${this._context.mediaUrl()}/${post.media}" class="card-img-top" alt="...">
+            <img src="${this._context.mediaUrl()}/${post.media}" class="img-responsive mx-auto d-block" style="max-width: 30%;" alt="...">
           `;
                 } else if (post.media.endsWith('.mp4') || post.media.endsWith('.webm')) {
                     postMedia = `
@@ -247,12 +247,12 @@ export default class MainPage {
           <div class="card-footer">
             <div class="row">
               <div class="col">
-                <a href="#" data-action="like" class="btn btn-sm btn-info" >Like</a>
-                <a href="#" data-action="dislike" class="btn btn-sm btn-danger">Dislike</a>
+                <a href="#" data-action="like" class="btn btn-sm btn-info" >Нравится</a>
+                <a href="#" data-action="dislike" class="btn btn-sm btn-danger">Не нравится</a>
               </div>
               <div class="col text-right">
-                <a href="#" data-action="edit" class="btn btn-sm btn-info">Edit</a>
-                <a href="#" data-action="remove" class="btn btn-sm btn-danger">Remove</a>
+                <a href="#" data-action="edit" class="btn btn-sm btn-info">Редактировать</a>
+                <a href="#" data-action="remove" class="btn btn-sm btn-danger">Удалить</a>
               </div>
             </div>
           </div>
@@ -306,7 +306,7 @@ export default class MainPage {
         <div class="card">
           <div class="card-body">
            <div class="col text-center">
-            <a href="#" data-action="upload-posts" class="btn btn-sm btn-info">Upload more posts</a>
+            <a href="#" data-action="upload-posts" class="btn btn-sm btn-info">Загрузить больше записей</a>
            </div>
           </div>
         </div>`;
@@ -348,7 +348,7 @@ export default class MainPage {
         <div class="card">
           <div class="card-body">
            <div class="col text-center">
-            <a href="#" data-action="new-posts" class="btn btn-sm btn-info">Upload ${count} new posts</a>
+            <a href="#" data-action="new-posts" class="btn btn-sm btn-info">Новых записей: ${count}</a>
            </div>
           </div>
         </div>`;
@@ -364,12 +364,18 @@ export default class MainPage {
         this._newPostsEl.appendChild(newPostEl);
     }
 
-    showError(error) {
-        const data = JSON.parse(error);
-        const message = this._context.translate(data.message);
-        this._errorMessageEl.textContent = message;
-        this._errorModal.modal('show');
+  showError(error) {
+    const data = JSON.parse(error);
+    let message = this._context.translate(data.message);
+    if (data.errors) {
+      for (var key in data.errors) {
+
+        message = message + ' ' + this._context.translate(key) + ':' + this._context.translate(data.errors[key]);
+      }
     }
+    this._errorMessageEl.textContent = message;
+    this._errorModal.modal('show');
+  }
 
     destroy() {
         clearTimeout(this._timeout);

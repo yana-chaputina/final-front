@@ -127,6 +127,7 @@ export default class UserPage {
             userEl.innerHTML = `
           <div class="card mb-3">
            <div class="row no-gutters">
+           <img src="${this._context.mediaUrl()}/${user.photo}" style="max-width: 15%;" class="img-fluid" alt="...">
            <div class="card-body">
             <p class="card-text">Имя: ${user.name}</p>
             <p class="card-text">Логин: ${user.username}</p>

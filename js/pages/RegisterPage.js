@@ -133,7 +133,14 @@ export default class RegisterPage {
 
     showError(error) {
         const data = JSON.parse(error);
-        const message = this._context.translate(data.message);
+        let message = this._context.translate(data.message);
+        if(data.errors) {
+            message+=":";
+            for (var key in data.errors) {
+                
+               message=message+' '+this._context.translate(key)+':'+this._context.translate(data.errors[key]);
+            }
+        }
         this._errorMessageEl.textContent = message;
         this._errorModal.modal('show');
     }
