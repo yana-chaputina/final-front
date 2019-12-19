@@ -30,7 +30,7 @@ export default class UserPage {
             </form>
         </ul>
         <form data-id="search-form" class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" data-id="search-input">
+              <input class="form-control mr-sm-2" type="search" placeholder="Поиск" data-id="search-input">
               <button type="submit" class="btn btn-info">Поиск</button>
         </form>
       </div>
