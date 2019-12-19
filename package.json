@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yana-chaputina/Social-front.git"
+    "url": "https://github.com/yana-chaputina/final-front.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yana-chaputina/Social-front/issues"
+    "url": "https://github.com/yana-chaputina/final-front/issues"
   },
-  "homepage": "https://github.com/yana-chaputina/Social-front#readme",
+  "homepage": "https://github.com/yana-chaputina/final-front#readme",
   "dependencies": {
     "live-server": "^1.2.1"
   },
