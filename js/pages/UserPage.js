@@ -119,7 +119,12 @@ export default class UserPage {
     }
 
     loadNewList(users) {
-        if (!users) {
+        if (users.length==0) {
+            const userEl = document.createElement('div');
+            userEl.innerHTML=`
+            <h6 style="text-align: center">Ничего не найдено!</h6>
+            `;
+            this._usersContainerEl.appendChild(userEl);
             return;
         }
         for (const user of users) {

@@ -100,7 +100,7 @@ export default class UserDetails {
     }
 
     loadNewList(user) {
-        if (!user) {
+        if (user.length==0) {
             return;
         }
         const userEl = document.createElement('div');

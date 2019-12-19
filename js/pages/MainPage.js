@@ -209,7 +209,12 @@ export default class MainPage {
     }
 
     loadNewList(posts) {
-        if (!posts) {
+        if (posts.length==0) {
+            const postEl = document.createElement('div');
+            postEl.innerHTML=`
+            <h6 style="text-align: center">Ничего не найдено!</h6>
+            `;
+            this._postsContainerEl.appendChild(postEl);
             return;
         }
         for (const post of posts) {
