@@ -112,7 +112,7 @@ export default class RegisterPage {
                 email: this._emailInputEl.value,
                 username: this._loginInputEl.value,
                 password: this._passwordInputEl.value,
-                photo: this._photoNameInputEl.value || null
+                photo: this._photoNameInputEl.value || "user.jpeg"
             };
             this._context.post('/users', JSON.stringify(data), {'Content-Type': 'application/json'},
                 text => {

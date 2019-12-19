@@ -216,7 +216,7 @@ export default class MainPage {
             if (post.media !== null) {
                 if (post.media.endsWith('.png') || post.media.endsWith('.jpg')||post.media.endsWith('.jpeg')) {
                     postMedia += `
-            <img src="${this._context.mediaUrl()}/${post.media}" class="img-responsive mx-auto d-block" style="max-width: 30%;" alt="...">
+            <img src="${this._context.mediaUrl()}/${post.media}" class="img-responsive mx-auto d-block" style="max-width: 50%;" alt="...">
           `;
                 } else if (post.media.endsWith('.mp4') || post.media.endsWith('.webm')) {
                     postMedia = `
@@ -236,7 +236,7 @@ export default class MainPage {
             postEl.innerHTML = `
         <div class="card mb-3">
           <div class="card-body">
-          <p class="card-text">${post.authorName}</p>
+          <p class="card-text">${post.authorUsername}</p>
           <p class="card-text">${post.created}</p>
           <br/>
             <p class="card-text">${post.content}</p>   
